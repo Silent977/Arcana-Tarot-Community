@@ -1,0 +1,22 @@
+{
+  "name": "arcana-tarot-community",
+  "version": "1.0.0",
+  "description": "Arcana Tarot Community - 7 ရက်သားသမီး ဟောစာတမ်း Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.14"
+  },
+  "keywords": [
+    "tarot",
+    "horoscope",
+    "myanmar",
+    "astrology"
+  ],
+  "author": "Arcana Tarot Community",
+  "license": "MIT"
+}

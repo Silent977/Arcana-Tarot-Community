@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcana Tarot Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0d0d1a;
+            --secondary-dark: #1a1a2e;
+            --accent-purple: #4a3f6b;
+            --accent-gold: #c9a227;
+            --text-light: #e8e8e8;
+            --text-muted: #9d9d9d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            min-height: 45px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            overflow: hidden;
+            flex-shrink: 0;
+            /* 
+            ===== LOGO IMAGE CUSTOMIZATION =====
+            Option 1: Online URL
+            <img src="https://your-image-url.com/logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;">
+            
+            Option 2: Local Storage
+            <img src="./images/logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;">
+            ===================================*/
+            
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent-gold), #f0d878);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-gold);/*Option 2: Local Storage*/
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hamburger Animation */
+        .mobile-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -7px);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            padding-top: 80px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(74, 63, 107, 0.2));
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-gold), #f0d878, var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Day Cards Section */
+        .section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin: 3rem 0 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '✦';
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .days-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .day-card {
+            background: linear-gradient(145deg, var(--secondary-dark), rgba(74, 63, 107, 0.3));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .day-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 5px 25px rgba(201, 162, 39, 0.15);
+        }
+
+        .day-card.expanded {
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 35px rgba(201, 162, 39, 0.2);
+            background: linear-gradient(145deg, var(--secondary-dark), rgba(74, 63, 107, 0.4));
+        }
+
+        .day-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .day-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            background: linear-gradient(135deg, var(--accent-purple), rgba(201, 162, 39, 0.5));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            overflow: hidden;
+            /* 
+            ===== DAY ICON IMAGE CUSTOMIZATION =====
+            Option 1: Online URL
+            <img src="https://your-image-url.com/sunday-icon.png" alt="Icon" style="width:100%;height:100%;object-fit:cover;">
+            
+            Option 2: Local Storage
+            <img src="./images/sunday-icon.png" alt="Icon" style="width:100%;height:100%;object-fit:cover;">
+            ========================================
+            */
+        }
+
+        .day-info {
+            flex: 1;
+        }
+
+        .day-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            margin-bottom: 0.25rem;
+            font-size: 1.2rem;
+        }
+
+        .day-card .date-range {
+            color: #8b7355;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        .day-card-content {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .horoscope-preview {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-height: 3.4em; /* 2 lines × 1.7 line-height */
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.3s ease;
+            position: relative;
+        }
+
+        .horoscope-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1.5em;
+            background: linear-gradient(transparent, var(--secondary-dark));
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .horoscope-preview.expanded {
+            max-height: 500px; /* Large enough for full content */
+        }
+
+        .horoscope-preview.expanded::after {
+            opacity: 0;
+        }
+
+        .horoscope-full {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .horoscope-full.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .see-more-btn {
+            background: none;
+            border: none;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            padding: 0.5rem 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .see-more-btn:hover {
+            color: #f0d878;
+        }
+
+        .see-more-btn .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .see-more-btn.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* About Page */
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .about-content {
+            background: linear-gradient(145deg, var(--secondary-dark), rgba(74, 63, 107, 0.2));
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .about-content h2 {
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: '✧';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+        }
+
+        /* Tarotist Profile */
+        .tarotist-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .tarotist-image {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            overflow: hidden;
+            border: 3px solid var(--accent-gold);
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .tarotist-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tarotist-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+            margin-top: 3rem;
+            color: var(--text-muted);
+        }
+
+        footer .logo-text {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(13, 13, 26, 0.98);
+                flex-direction: column;
+                padding: 0;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease, padding 0.4s ease;
+            }
+
+            .nav-links.active {
+                max-height: 300px;
+                padding: 1rem 0;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+                text-align: center;
+                color: var(--accent-gold);
+                border: none;
+                background: none;
+            }
+
+            .nav-links a:hover,
+            .nav-links a.active {
+                background: none;
+                color: #f0d878;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo-text {
+                font-size: 1rem;
+            }
+
+            .days-list {
+                padding: 1rem;
+            }
+
+            .day-card-header {
+                gap: 0.75rem;
+            }
+
+            .day-icon {
+                width: 50px;
+                height: 50px;
+                min-width: 50px;
+                font-size: 1.5rem;
+            }
+
+            .day-card h3 {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            /* Mobile - About & Course Card Larger Size */
+            .about-container {
+                padding: 1.5rem 0.75rem;
+            }
+
+            .about-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .about-content {
+                padding: 1.5rem 1.25rem;
+                border-radius: 15px;
+                margin: 0 0.25rem;
+            }
+
+            .about-content h2 {
+                font-size: 1.15rem;
+                margin: 1.25rem 0 0.75rem;
+            }
+
+            .about-content p {
+                font-size: 1rem;
+                line-height: 1.9;
+            }
+
+            .features-list li {
+                font-size: 1rem;
+                padding: 0.6rem 0;
+                padding-left: 1.75rem;
+                line-height: 1.7;
+            }
+
+            .tarotist-image {
+                width: 130px;
+                height: 130px;
+            }
+
+            .tarotist-title {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <!-- 
+            ===== LOGO IMAGE CUSTOMIZATION =====
+            Replace the emoji below with your custom image:
+            
+            Option 1: Online URL
+            <img src="https://your-image-url.com/logo.png" alt="Arcana Tarot Logo" style="width:100%;height:100%;object-fit:cover;">
+        
+            Option 2: Local Storage (place image in same folder or subfolder)-->
+            
+            
+            
+            <div class="logo-icon"><img src="./img/arcana_tarot_community.png" alt="Arcana Tarot Logo" style="width:100%;height:100%;object-fit:cover;"></div>
+            <span class="logo-text">Arcana Tarot Community</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a onclick="showPage('home')" class="active" data-page="home">ပင်မစာမျက်နှာ</a></li>
+            <li><a onclick="showPage('about')" data-page="about">ကျွန်ုပ်တို့အကြောင်း</a></li>
+            <li><a onclick="showPage('course')" data-page="course">သင်တန်းစုံစမ်းရန်</a></li>
+        </ul>
+        <div class="mobile-menu" id="mobileMenu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <div class="page active" id="home">
+            <section class="hero">
+                <h1>✨ Arcana Tarot Community ✨</h1>
+                <p>သင့်ကံကြမ္မာကို ကြယ်တာရာများနှင့် ဂြိုဟ်များ၏ လမ်းညွှန်မှုဖြင့် ရှာဖွေလိုက်ပါ</p>
+            </section>
+
+            <h2 class="section-title">၇ ရက်သားသမီး ဟောစာတမ်း</h2>
+
+            <div class="days-list">
+                <!-- တနင်္ဂနွေ -->
+                <div class="day-card" data-day="sunday">
+                    <div class="day-card-header">
+                        <div class="day-icon">☀️</div>
+                        <div class="day-info">
+                            <h3>တနင်္ဂနွေသားသမီး</h3>
+                            <p class="date-range">မတ် ၂၁ မှ ဧပြီ ၁၉ အထိ</p>
+                        </div>
+                    </div>
+                    <div class="day-card-content">
+                        <p class="horoscope-preview">ခေါင်းဆောင်မှုအရည်အချင်း ထူးချွန်ပြီး ရဲရင့်သောသူများဖြစ်သည်။ ဂုဏ်သိက္ခာကို တန်ဖိုးထားသူများ။ ယနေ့ကံကြမ္မာမှာ အလုပ်ကိစ္စများတွင် အောင်မြင်မှုများ ရရှိနိုင်သည်။ ရာထူးတိုးခြင်း၊ လုပ်ငန်းတိုးတက်ခြင်း အခွင့်အလမ်းများရှိသည်။ မိသားစုနှင့် ပျော်ရွှင်စရာ အချိန်များရရှိမည်။ မျှော်လင့်မထားသော ဝင်ငွေများ ရရှိနိုင်သည်။ ကံကောင်းစေသော အရောင်မှာ အနီရောင်နှင့် ရွှေရောင် ဖြစ်သည်။</p>
+                        <button class="see-more-btn" onclick="toggleHoroscope(this)">
+                            ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- တနင်္လာ -->
+                <div class="day-card" data-day="monday">
+                    <div class="day-card-header">
+                        <div class="day-icon">🌙</div>
+                        <div class="day-info">
+                            <h3>တနင်္လာသားသမီး</h3>
+                            <p class="date-range">ဧပြီ ၂၀ မှ မေ ၂၀ အထိ</p>
+                        </div>
+                    </div>
+                    <div class="day-card-content">
+                        <p class="horoscope-preview">စိတ်နူးညံ့သိမ်မွေ့ပြီး အလှတရားကို မြတ်နိုးသူများဖြစ်သည်။ မိသားစုကို အထူးချစ်ခင်သူများ။ စိတ်ခံစားမှုများ အားကောင်းနေသော အချိန်ဖြစ်သည်။ အနုပညာလုပ်ငန်းများတွင် အထူးကောင်းမွန်သည်။ ဖန်တီးမှုဆိုင်ရာ အလုပ်များတွင် အောင်မြင်မည်။ ချစ်သူနှင့် နားလည်မှု ပိုမိုကောင်းမွန်လာမည်။ ကံကောင်းစေသော အရောင်မှာ အဖြူရောင်နှင့် ငွေရောင် ဖြစ်သည်။</p>
+                        <button class="see-more-btn" onclick="toggleHoroscope(this)">
+                            ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- အင်္ဂါ -->
+                <div class="day-card" data-day="tuesday">
+                    <div class="day-card-header">
+                        <div class="day-icon">🔥</div>
+                        <div class="day-info">
+                            <h3>အင်္ဂါသားသမီး</h3>
+                            <p class="date-range">မေ ၂၁ မှ ဇွန် ၂၀ အထိ</p>
+                        </div>
+                    </div>
+                    <div class="day-card-content">
+                        <p class="horoscope-preview">စွမ်းအားကြီးမားပြီး ရဲရင့်သတ္တိရှိသူများဖြစ်သည်။ စိန်ခေါ်မှုများကို ကြိုက်နှစ်သက်သူများ။ စွမ်းအင်ပြည့်ဝနေသော နေ့ဖြစ်သည်။ စိန်ခေါ်မှုများကို ရင်ဆိုင်ရန် အသင့်ရှိနေသည်။ ပြိုင်ဆိုင်မှုများတွင် အနိုင်ရရှိနိုင်သည်။ စိတ်လှုပ်ရှားဖွယ် အတွေ့အကြုံများ ရရှိမည်။ ကံကောင်းစေသော အရောင်မှာ အနီရောင်နှင့် လိမ္မော်ရောင် ဖြစ်သည်။</p>
+                        <button class="see-more-btn" onclick="toggleHoroscope(this)">
+                            ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ဗုဒ္ဓဟူး -->
+                <div class="day-card" data-day="wednesday">
+                    <div class="day-card-header">
+                        <div class="day-icon">💫</div>
+                        <div class="day-info">
+                            <h3>ဗုဒ္ဓဟူးသားသမီး</h3>
+                            <p class="date-range">ဇွန် ၂၁ မှ ဇူလိုင် ၂၂ အထိ</p>
+                        </div>
+                    </div>
+                    <div class="day-card-content">
+                        <p class="horoscope-preview">ဉာဏ်ပညာထက်မြက်ပြီး ဆက်ဆံရေးကောင်းမွန်သူများဖြစ်သည်။ စကားပြောကျွမ်းကျင်သူများ။ ဆက်ဆံရေးနှင့် ဆက်သွယ်ရေးများ အလွန်ကောင်းမွန်သော နေ့ဖြစ်သည်။ စီးပွားရေး ညှိနှိုင်းမှုများ အောင်မြင်မည်။ နားလည်မှုကောင်းပြီး ပြဿနာများ ဖြေရှင်းနိုင်သည်။ ကံကောင်းစေသော အရောင်မှာ အစိမ်းရောင်နှင့် အဝါရောင် ဖြစ်သည်။</p>
+                        <button class="see-more-btn" onclick="toggleHoroscope(this)">
+                            ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ကြာသပတေး -->
+                <div class="day-card" data-day="thursday">
+                    <div class="day-card-header">
+                        <div class="day-icon">⚡</div>
+                        <div class="day-info">
+                            <h3>ကြာသပတေးသားသမီး</h3>
+                            <p class="date-range">ဇူလိုင် ၂၃ မှ သြဂုတ် ၂၂ အထိ</p>
+                        </div>
+                    </div>
+                    <div class="day-card-content">
+                        <p class="horoscope-preview">ကံကောင်းခြင်းနှင့် ဝင်ငွေကောင်းမွန်သူများဖြစ်သည်။ ဘာသာရေးကို ကြည်ညိုသူများ။ ကံကောင်းခြင်းနှင့် ဝင်ငွေကောင်းမွန်သော နေ့ဖြစ်သည်။ ဘုရားဖူးသွားပါ။ အကြီးအကဲများ၏ ထောက်ခံမှု ရရှိမည်။ မင်္ဂလာဆောင်ရန် အချိန်ကောင်းဖြစ်သည်။ ကံထီပေါက်နိုင်ခြေ ရှိသည်။ ကံကောင်းစေသော အရောင်မှာ အဝါရောင်နှင့် ရွှေရောင် ဖြစ်သည်။</p>
+                        <button class="see-more-btn" onclick="toggleHoroscope(this)">
+                            ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- သောကြာ -->
+                <div class="day-card" data-day="friday">
+                    <div class="day-card-header">
+                        <div class="day-icon">💎</div>
+                        <div class="day-info">
+                            <h3>သောကြာသားသမီး</h3>
+                            <p class="date-range">သြဂုတ် ၂၃ မှ စက်တင်ဘာ ၂၂ အထိ</p>
+                        </div>
+                    </div>
+                    <div class="day-card-content">
+                        <p class="horoscope-preview">အလှအပကို နှစ်သက်ပြီး အနုပညာကို ချစ်မြတ်နိုးသူများဖြစ်သည်။ ချစ်ခြင်းမေတ္တာ ပြည့်ဝသူများ။ အလှအပနှင့် အနုပညာကိစ္စများတွင် ထူးချွန်သော နေ့ဖြစ်သည်။ ဖက်ရှင်၊ အနုပညာလုပ်ငန်းများ အောင်မြင်မည်။ ချစ်ခြင်းမေတ္တာ ပြည့်ဝသော နေ့ဖြစ်သည်။ ကံကောင်းစေသော အရောင်မှာ ပန်းရောင်နှင့် အဖြူရောင် ဖြစ်သည်။</p>
+                        <button class="see-more-btn" onclick="toggleHoroscope(this)">
+                            ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- စနေ -->
+                <div class="day-card" data-day="saturday">
+                    <div class="day-card-header">
+                        <div class="day-icon">🪐</div>
+                        <div class="day-info">
+                            <h3>စနေသားသမီး</h3>
+                            <p class="date-range">စက်တင်ဘာ ၂၃ မှ အောက်တိုဘာ ၂၂ အထိ</p>
+                        </div>
+                    </div>
+                    <div class="day-card-content">
+                        <p class="horoscope-preview">ကြံ့ခိုင်သည်းခံနိုင်ပြီး စည်းကမ်းတကျ နေထိုင်သူများဖြစ်သည်။ ဇွဲလုံ့လ ကြီးမားသူများ။ စိတ်ရှည်သည်းခံပြီး ကြိုးစားပါက အောင်မြင်မှုရရှိမည်။ ကြာရှည်ခံသော စီမံကိန်းများ စတင်ရန် ကောင်းသည်။ တည်ငြိမ်သော ဆက်ဆံရေးများ ရရှိမည်။ စုဆောင်းငွေများ တိုးပွားလာမည်။ ကံကောင်းစေသော အရောင်မှာ အပြာရောင်နှင့် အမဲရောင် ဖြစ်သည်။</p>
+                        <button class="see-more-btn" onclick="toggleHoroscope(this)">
+                            ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div class="page" id="about">
+            <div class="about-container">
+                <div class="about-header">
+                    <h1>✧ ကျွန်ုပ်တို့အကြောင်း ✧</h1>
+                    <p>Arcana Tarot Community မှ ကြိုဆိုပါသည်</p>
+                </div>
+                <div class="about-content">
+                    <!-- Tarotist Profile Section -->
+                    <div class="tarotist-profile">
+                        <div class="tarotist-image">
+                            <!-- 
+                            ===== TAROTIST PROFILE IMAGE =====
+                            Replace this placeholder with your image from local storage:-->
+                            <img src="/img/photo_2026-02-05_11-51-46.jpg" alt="Tarotist" style="width:100%;height:100%;object-fit:cover;">
+                            
+                        </div>
+                        <p class="tarotist-title">Myat Thar Linn</p>
+                        <p class="tarotist-title">Tarotist</p>
+                    </div>
+
+                    <h2>🔮 မိတ်ဆက်</h2>
+                    <p>Arcana Tarot Community သည် မြန်မာနိုင်ငံတွင် ဗေဒင်ပညာနှင့် တာရော့ဖတ်ခြင်းကို စိတ်ဝင်စားသူများအတွက် ဖန်တီးထားသော အသိုင်းအဝိုင်းတစ်ခုဖြစ်ပါသည်။</p>
+                    
+                    <h2>⭐ ကျွန်ုပ်တို့၏ ရည်ရွယ်ချက်</h2>
+                    <p>ရှေးဟောင်း ဗေဒင်ပညာရပ်များကို ခေတ်သစ်နည်းလမ်းများဖြင့် ပေါင်းစပ်ကာ လူတိုင်းအတွက် နားလည်လွယ်ပြီး အသုံးဝင်သော ဟောစာတမ်းများကို ပေးအပ်ရန် ရည်ရွယ်ပါသည်။</p>
+
+                    <h2>🌟 ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုများ</h2>
+                    <ul class="features-list">
+                        <li>၇ ရက်သားသမီး နေ့စဉ်/အပတ်စဉ် ဟောစာတမ်း</li>
+                        <li>တာရော့ကဒ် ဖတ်ခြင်း သင်တန်းများ</li>
+                        <li>ဗေဒင်ပညာ အခြေခံသင်တန်းများ</li>
+                        <li>တစ်ဦးချင်း ဟောစာတမ်း တိုင်ပင်ခြင်း</li>
+                        <li>လက်ထပ်ရက်ကောင်း၊ အိမ်ဆောက်ရက်ကောင်း ရွေးချယ်ခြင်း</li>
+                    </ul>
+
+                    <h2>💜 ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ရန်</h2>
+                    <p>သင်တန်းများနှင့် ပတ်သက်၍ စုံစမ်းမေးမြန်းလိုပါက "သင်တန်းစုံစမ်းရန်" စာမျက်နှာမှတစ်ဆင့် ဆက်သွယ်နိုင်ပါသည်။</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Page -->
+        <div class="page" id="course">
+            <div class="about-container">
+                <div class="about-header">
+                    <h1>📚 သင်တန်းစုံစမ်းရန်</h1>
+                    <p>Arcana Tarot Community မှ ပေးအပ်သော သင်တန်းများ</p>
+                </div>
+                <div class="about-content">
+                    <h2>🃏 တာရော့ကဒ် အခြေခံသင်တန်း</h2>
+                    <p>၇၈ ကဒ်အဓိပ္ပာယ်နှင့် ဖတ်နည်းများကို အခြေခံမှစ၍ သင်ကြားပေးပါသည်။ Major Arcana ၂၂ ကဒ်နှင့် Minor Arcana ၅၆ ကဒ်တို့၏ အဓိပ္ပာယ်များ၊ ကဒ်ခင်းကျင်းနည်းများနှင့် ဖတ်ရှုနည်းများကို လေ့လာနိုင်ပါသည်။</p>
+
+                    <h2>🌙 ဗေဒင်ပညာ အခြေခံသင်တန်း</h2>
+                    <p>ဂြိုဟ်များ၊ ရာသီခွင်များနှင့် ဟောကိန်းများကို နားလည်လွယ်အောင် သင်ကြားပေးပါသည်။ ဇာတာဖွဲ့နည်း၊ ဂြိုဟ်အင်အားတွက်နည်းများနှင့် ဟောကိန်းထုတ်နည်းများကို သင်ယူနိုင်ပါသည်။</p>
+
+                    <h2>✋ လက်ဗွေပညာ သင်တန်း</h2>
+                    <p>လက်ဗွေဖတ်ခြင်းနှင့် ခန့်မှန်းခြင်းပညာကို သင်ကြားပေးပါသည်။ လက်မျဉ်းများ၏ အဓိပ္ပာယ်များ၊ လက်ပုံသဏ္ဍာန်များနှင့် လက်ချောင်းများ၏ ဆိုလိုရင်းများကို လေ့လာနိုင်ပါသည်။</p>
+
+                    <h2>⭐ အဆင့်မြင့် သင်တန်းများ</h2>
+                    <p>အခြေခံသင်တန်းများ ပြီးဆုံးပြီးသူများအတွက် အဆင့်မြင့်သင်တန်းများကို ဖွင့်လှစ်ပေးပါသည်။ တစ်ဦးချင်း ဟောစာတမ်းဖတ်ခြင်း၊ စီးပွားရေးအတွက် ဟောကိန်းထုတ်ခြင်းနှင့် အထူးကိစ္စရပ်များအတွက် ဖတ်ရှုနည်းများကို သင်ယူနိုင်ပါသည်။</p>
+
+                    <h2>📞 ဆက်သွယ်ရန်</h2>
+                    <ul class="features-list">
+                        <li>Facebook Page: Arcana Tarot Community</li>
+                        <li>Telegram: @ArcanaTarot</li>
+                        <li>Phone: 09-xxx-xxx-xxx</li>
+                    </ul>
+
+                    <p style="margin-top: 1.5rem; text-align: center; color: var(--accent-gold);">✨ သင်တန်းများနှင့် ပတ်သက်၍ အသေးစိတ် သိရှိလိုပါက အထက်ပါ လိပ်စာများမှတစ်ဆင့် ဆက်သွယ်မေးမြန်းနိုင်ပါသည် ✨</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo-text">✧ Arcana Tarot Community ✧</div>
+        <p>© 2024 Arcana Tarot Community. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile menu when page changes
+            document.getElementById('navLinks').classList.remove('active');
+            document.getElementById('mobileMenu').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        // Toggle Horoscope Expand/Collapse
+        function toggleHoroscope(btn) {
+            const content = btn.parentElement;
+            const preview = content.querySelector('.horoscope-preview');
+            const card = btn.closest('.day-card');
+            
+            btn.classList.toggle('active');
+            preview.classList.toggle('expanded');
+            card.classList.toggle('expanded');
+            
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = 'ခေါက်သိမ်းရန် <span class="arrow">▼</span>';
+            } else {
+                btn.innerHTML = 'ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>';
+            }
+        }
+
+        // Notion မှ ဟောစာတမ်း data fetch လုပ်ခြင်း
+        async function fetchHoroscopes() {
+            try {
+                const response = await fetch('/api/horoscope');
+                const result = await response.json();
+                
+                if (result.success && result.data) {
+                    result.data.forEach(item => {
+                        // data-day attribute နှင့် match လုပ်ခြင်း
+                        const card = document.querySelector(`[data-day="${item.day}"]`);
+                        if (card) {
+                            // Date range update
+                            const dateRange = card.querySelector('.date-range');
+                            if (dateRange && item.date_range) {
+                                dateRange.textContent = item.date_range;
+                            }
+                            
+                            // Horoscope update
+                            const preview = card.querySelector('.horoscope-preview');
+                            if (preview && item.horoscope) {
+                                preview.textContent = item.horoscope;
+                            }
+                        }
+                    });
+                    console.log('✨ Horoscopes updated from Notion!');
+                }
+            } catch (error) {
+                console.log('📌 Using default horoscope data (Notion not connected)');
+            }
+        }
+
+        // Page load မှာ Notion data fetch လုပ်ခြင်း
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchHoroscopes();
+        });
+    </script>
+</body>
+</html>
