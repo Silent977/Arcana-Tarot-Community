@@ -1,42 +1,54 @@
 const { Client } = require('@notionhq/client');
 
-// Notion client ဖန်တီးခြင်း
+// Notion client init
 const notion = new Client({
   auth: process.env.NOTION_API_KEY
 });
 
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
-module.exports = async (req, res) => {
+exports.handler = async function(event, context) {
   // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Content-Type': 'application/json'
+  };
 
   // Handle OPTIONS request for CORS
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: ''
+    };
   }
 
   // GET method only
-  if (req.method !== 'GET') {
-    res.status(405).json({ success: false, error: 'Method not allowed' });
-    return;
+  if (event.httpMethod !== 'GET') {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ success: false, error: 'Method not allowed' })
+    };
   }
 
   try {
     // Check if environment variables are set
     if (!process.env.NOTION_API_KEY || !process.env.NOTION_DATABASE_ID) {
       console.error('Missing environment variables');
-      res.status(500).json({
-        success: false,
-        error: 'Server configuration error'
-      });
-      return;
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({
+          success: false,
+          error: 'Server configuration error'
+        })
+      };
     }
 
-    // Notion database မှ data query လုပ်ခြင်း
+    // Query Notion database
     const response = await notion.databases.query({
       database_id: DATABASE_ID,
       sorts: [
@@ -47,7 +59,7 @@ module.exports = async (req, res) => {
       ]
     });
 
-    // Data ကို format လုပ်ခြင်း
+    // Format data
     const horoscopes = response.results.map(page => {
       const props = page.properties;
       
@@ -81,20 +93,28 @@ module.exports = async (req, res) => {
     });
 
     // Success response
-    res.status(200).json({
-      success: true,
-      data: horoscopes,
-      updated_at: new Date().toISOString()
-    });
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({
+        success: true,
+        data: horoscopes,
+        updated_at: new Date().toISOString()
+      })
+    };
 
   } catch (error) {
     console.error('Notion API Error:', error.message);
     
     // Error response
-    res.status(500).json({
-      success: false,
-      error: 'Failed to fetch horoscope data',
-      message: error.message
-    });
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({
+        success: false,
+        error: 'Failed to fetch horoscope data',
+        message: error.message
+      })
+    };
   }
 };
