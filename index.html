@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="my">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,8 +49,15 @@
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         /* Navigation */
@@ -94,7 +102,7 @@
             Option 2: Local Storage
             <img src="./images/logo.png" alt="Logo" style="width:100%;height:100%;object-fit:cover;">
             ===================================*/
-            
+
         }
 
         .logo-text {
@@ -124,7 +132,8 @@
 
         .nav-links a:hover,
         .nav-links a.active {
-            color: var(--accent-gold);/*Option 2: Local Storage*/
+            color: var(--accent-gold);
+            /*Option 2: Local Storage*/
         }
 
         .mobile-menu {
@@ -173,8 +182,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Hero Section */
@@ -301,10 +317,11 @@
             color: var(--text-light);
             font-size: 0.95rem;
             line-height: 1.7;
-            max-height: 3.4em; /* 2 lines × 1.7 line-height */
+            max-height: 3.4em;
+            /* 2 lines × 1.7 line-height */
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                        opacity 0.3s ease;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease;
             position: relative;
             white-space: pre-wrap;
         }
@@ -322,7 +339,8 @@
         }
 
         .horoscope-preview.expanded {
-            max-height: 500px; /* Large enough for full content */
+            max-height: 2000px;
+            /* Large enough for full content */
         }
 
         .horoscope-preview.expanded::after {
@@ -511,9 +529,17 @@
                 transform: translateY(0);
             }
 
-            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
-            .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
-            .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(1) {
+                transition-delay: 0.1s;
+            }
+
+            .nav-links.active li:nth-child(2) {
+                transition-delay: 0.2s;
+            }
+
+            .nav-links.active li:nth-child(3) {
+                transition-delay: 0.3s;
+            }
 
             .nav-links a {
                 display: block;
@@ -608,6 +634,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Stars Background -->
     <div class="stars" id="stars"></div>
@@ -623,10 +650,11 @@
             <img src="https://your-image-url.com/logo.png" alt="Arcana Tarot Logo" style="width:100%;height:100%;object-fit:cover;">
         
             Option 2: Local Storage (place image in same folder or subfolder)-->
-            
-            
-            
-            <div class="logo-icon"><img src="/arcana_tarot_community.png" alt="Arcana Tarot Logo" style="width:100%;height:100%;object-fit:cover;"></div>
+
+
+
+            <div class="logo-icon"><img src="/arcana_tarot_community.png" alt="Arcana Tarot Logo"
+                    style="width:100%;height:100%;object-fit:cover;"></div>
             <span class="logo-text">Arcana Tarot Community</span>
         </div>
         <ul class="nav-links" id="navLinks">
@@ -663,7 +691,11 @@
                         </div>
                     </div>
                     <div class="day-card-content">
-                        <p class="horoscope-preview">ခေါင်းဆောင်မှုအရည်အချင်း ထူးချွန်ပြီး ရဲရင့်သောသူများဖြစ်သည်။ ဂုဏ်သိက္ခာကို တန်ဖိုးထားသူများ။ ယနေ့ကံကြမ္မာမှာ အလုပ်ကိစ္စများတွင် အောင်မြင်မှုများ ရရှိနိုင်သည်။ ရာထူးတိုးခြင်း၊ လုပ်ငန်းတိုးတက်ခြင်း အခွင့်အလမ်းများရှိသည်။ မိသားစုနှင့် ပျော်ရွှင်စရာ အချိန်များရရှိမည်။ မျှော်လင့်မထားသော ဝင်ငွေများ ရရှိနိုင်သည်။ ကံကောင်းစေသော အရောင်မှာ အနီရောင်နှင့် ရွှေရောင် ဖြစ်သည်။</p>
+                        <p class="horoscope-preview">ခေါင်းဆောင်မှုအရည်အချင်း ထူးချွန်ပြီး ရဲရင့်သောသူများဖြစ်သည်။
+                            ဂုဏ်သိက္ခာကို တန်ဖိုးထားသူများ။ ယနေ့ကံကြမ္မာမှာ အလုပ်ကိစ္စများတွင် အောင်မြင်မှုများ
+                            ရရှိနိုင်သည်။ ရာထူးတိုးခြင်း၊ လုပ်ငန်းတိုးတက်ခြင်း အခွင့်အလမ်းများရှိသည်။ မိသားစုနှင့်
+                            ပျော်ရွှင်စရာ အချိန်များရရှိမည်။ မျှော်လင့်မထားသော ဝင်ငွေများ ရရှိနိုင်သည်။ ကံကောင်းစေသော
+                            အရောင်မှာ အနီရောင်နှင့် ရွှေရောင် ဖြစ်သည်။</p>
                         <button class="see-more-btn" onclick="toggleHoroscope(this)">
                             ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
                         </button>
@@ -680,7 +712,10 @@
                         </div>
                     </div>
                     <div class="day-card-content">
-                        <p class="horoscope-preview">စိတ်နူးညံ့သိမ်မွေ့ပြီး အလှတရားကို မြတ်နိုးသူများဖြစ်သည်။ မိသားစုကို အထူးချစ်ခင်သူများ။ စိတ်ခံစားမှုများ အားကောင်းနေသော အချိန်ဖြစ်သည်။ အနုပညာလုပ်ငန်းများတွင် အထူးကောင်းမွန်သည်။ ဖန်တီးမှုဆိုင်ရာ အလုပ်များတွင် အောင်မြင်မည်။ ချစ်သူနှင့် နားလည်မှု ပိုမိုကောင်းမွန်လာမည်။ ကံကောင်းစေသော အရောင်မှာ အဖြူရောင်နှင့် ငွေရောင် ဖြစ်သည်။</p>
+                        <p class="horoscope-preview">စိတ်နူးညံ့သိမ်မွေ့ပြီး အလှတရားကို မြတ်နိုးသူများဖြစ်သည်။ မိသားစုကို
+                            အထူးချစ်ခင်သူများ။ စိတ်ခံစားမှုများ အားကောင်းနေသော အချိန်ဖြစ်သည်။ အနုပညာလုပ်ငန်းများတွင်
+                            အထူးကောင်းမွန်သည်။ ဖန်တီးမှုဆိုင်ရာ အလုပ်များတွင် အောင်မြင်မည်။ ချစ်သူနှင့် နားလည်မှု
+                            ပိုမိုကောင်းမွန်လာမည်။ ကံကောင်းစေသော အရောင်မှာ အဖြူရောင်နှင့် ငွေရောင် ဖြစ်သည်။</p>
                         <button class="see-more-btn" onclick="toggleHoroscope(this)">
                             ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
                         </button>
@@ -697,7 +732,10 @@
                         </div>
                     </div>
                     <div class="day-card-content">
-                        <p class="horoscope-preview">စွမ်းအားကြီးမားပြီး ရဲရင့်သတ္တိရှိသူများဖြစ်သည်။ စိန်ခေါ်မှုများကို ကြိုက်နှစ်သက်သူများ။ စွမ်းအင်ပြည့်ဝနေသော နေ့ဖြစ်သည်။ စိန်ခေါ်မှုများကို ရင်ဆိုင်ရန် အသင့်ရှိနေသည်။ ပြိုင်ဆိုင်မှုများတွင် အနိုင်ရရှိနိုင်သည်။ စိတ်လှုပ်ရှားဖွယ် အတွေ့အကြုံများ ရရှိမည်။ ကံကောင်းစေသော အရောင်မှာ အနီရောင်နှင့် လိမ္မော်ရောင် ဖြစ်သည်။</p>
+                        <p class="horoscope-preview">စွမ်းအားကြီးမားပြီး ရဲရင့်သတ္တိရှိသူများဖြစ်သည်။ စိန်ခေါ်မှုများကို
+                            ကြိုက်နှစ်သက်သူများ။ စွမ်းအင်ပြည့်ဝနေသော နေ့ဖြစ်သည်။ စိန်ခေါ်မှုများကို ရင်ဆိုင်ရန်
+                            အသင့်ရှိနေသည်။ ပြိုင်ဆိုင်မှုများတွင် အနိုင်ရရှိနိုင်သည်။ စိတ်လှုပ်ရှားဖွယ် အတွေ့အကြုံများ
+                            ရရှိမည်။ ကံကောင်းစေသော အရောင်မှာ အနီရောင်နှင့် လိမ္မော်ရောင် ဖြစ်သည်။</p>
                         <button class="see-more-btn" onclick="toggleHoroscope(this)">
                             ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
                         </button>
@@ -714,7 +752,10 @@
                         </div>
                     </div>
                     <div class="day-card-content">
-                        <p class="horoscope-preview">ဉာဏ်ပညာထက်မြက်ပြီး ဆက်ဆံရေးကောင်းမွန်သူများဖြစ်သည်။ စကားပြောကျွမ်းကျင်သူများ။ ဆက်ဆံရေးနှင့် ဆက်သွယ်ရေးများ အလွန်ကောင်းမွန်သော နေ့ဖြစ်သည်။ စီးပွားရေး ညှိနှိုင်းမှုများ အောင်မြင်မည်။ နားလည်မှုကောင်းပြီး ပြဿနာများ ဖြေရှင်းနိုင်သည်။ ကံကောင်းစေသော အရောင်မှာ အစိမ်းရောင်နှင့် အဝါရောင် ဖြစ်သည်။</p>
+                        <p class="horoscope-preview">ဉာဏ်ပညာထက်မြက်ပြီး ဆက်ဆံရေးကောင်းမွန်သူများဖြစ်သည်။
+                            စကားပြောကျွမ်းကျင်သူများ။ ဆက်ဆံရေးနှင့် ဆက်သွယ်ရေးများ အလွန်ကောင်းမွန်သော နေ့ဖြစ်သည်။
+                            စီးပွားရေး ညှိနှိုင်းမှုများ အောင်မြင်မည်။ နားလည်မှုကောင်းပြီး ပြဿနာများ ဖြေရှင်းနိုင်သည်။
+                            ကံကောင်းစေသော အရောင်မှာ အစိမ်းရောင်နှင့် အဝါရောင် ဖြစ်သည်။</p>
                         <button class="see-more-btn" onclick="toggleHoroscope(this)">
                             ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
                         </button>
@@ -731,7 +772,10 @@
                         </div>
                     </div>
                     <div class="day-card-content">
-                        <p class="horoscope-preview">ကံကောင်းခြင်းနှင့် ဝင်ငွေကောင်းမွန်သူများဖြစ်သည်။ ဘာသာရေးကို ကြည်ညိုသူများ။ ကံကောင်းခြင်းနှင့် ဝင်ငွေကောင်းမွန်သော နေ့ဖြစ်သည်။ ဘုရားဖူးသွားပါ။ အကြီးအကဲများ၏ ထောက်ခံမှု ရရှိမည်။ မင်္ဂလာဆောင်ရန် အချိန်ကောင်းဖြစ်သည်။ ကံထီပေါက်နိုင်ခြေ ရှိသည်။ ကံကောင်းစေသော အရောင်မှာ အဝါရောင်နှင့် ရွှေရောင် ဖြစ်သည်။</p>
+                        <p class="horoscope-preview">ကံကောင်းခြင်းနှင့် ဝင်ငွေကောင်းမွန်သူများဖြစ်သည်။ ဘာသာရေးကို
+                            ကြည်ညိုသူများ။ ကံကောင်းခြင်းနှင့် ဝင်ငွေကောင်းမွန်သော နေ့ဖြစ်သည်။ ဘုရားဖူးသွားပါ။
+                            အကြီးအကဲများ၏ ထောက်ခံမှု ရရှိမည်။ မင်္ဂလာဆောင်ရန် အချိန်ကောင်းဖြစ်သည်။ ကံထီပေါက်နိုင်ခြေ
+                            ရှိသည်။ ကံကောင်းစေသော အရောင်မှာ အဝါရောင်နှင့် ရွှေရောင် ဖြစ်သည်။</p>
                         <button class="see-more-btn" onclick="toggleHoroscope(this)">
                             ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
                         </button>
@@ -748,7 +792,10 @@
                         </div>
                     </div>
                     <div class="day-card-content">
-                        <p class="horoscope-preview">အလှအပကို နှစ်သက်ပြီး အနုပညာကို ချစ်မြတ်နိုးသူများဖြစ်သည်။ ချစ်ခြင်းမေတ္တာ ပြည့်ဝသူများ။ အလှအပနှင့် အနုပညာကိစ္စများတွင် ထူးချွန်သော နေ့ဖြစ်သည်။ ဖက်ရှင်၊ အနုပညာလုပ်ငန်းများ အောင်မြင်မည်။ ချစ်ခြင်းမေတ္တာ ပြည့်ဝသော နေ့ဖြစ်သည်။ ကံကောင်းစေသော အရောင်မှာ ပန်းရောင်နှင့် အဖြူရောင် ဖြစ်သည်။</p>
+                        <p class="horoscope-preview">အလှအပကို နှစ်သက်ပြီး အနုပညာကို ချစ်မြတ်နိုးသူများဖြစ်သည်။
+                            ချစ်ခြင်းမေတ္တာ ပြည့်ဝသူများ။ အလှအပနှင့် အနုပညာကိစ္စများတွင် ထူးချွန်သော နေ့ဖြစ်သည်။
+                            ဖက်ရှင်၊ အနုပညာလုပ်ငန်းများ အောင်မြင်မည်။ ချစ်ခြင်းမေတ္တာ ပြည့်ဝသော နေ့ဖြစ်သည်။
+                            ကံကောင်းစေသော အရောင်မှာ ပန်းရောင်နှင့် အဖြူရောင် ဖြစ်သည်။</p>
                         <button class="see-more-btn" onclick="toggleHoroscope(this)">
                             ပိုမိုဖတ်ရှုရန် <span class="arrow">▼</span>
                         </button>
@@ -788,18 +835,21 @@
                             <!-- 
                             ===== TAROTIST PROFILE IMAGE =====
                             Replace this placeholder with your image from local storage:-->
-                            <img src="/photo_2026-02-05_11-51-46.jpg" alt="Tarotist" style="width:100%;height:100%;object-fit:cover;">
-                            
+                            <img src="/photo_2026-02-05_11-51-46.jpg" alt="Tarotist"
+                                style="width:100%;height:100%;object-fit:cover;">
+
                         </div>
                         <p class="tarotist-title">Myat Thar Linn</p>
                         <p class="tarotist-title">Tarotist</p>
                     </div>
 
                     <h2>🔮 မိတ်ဆက်</h2>
-                    <p>Arcana Tarot Community သည် မြန်မာနိုင်ငံတွင် ဗေဒင်ပညာနှင့် တာရော့ဖတ်ခြင်းကို စိတ်ဝင်စားသူများအတွက် ဖန်တီးထားသော အသိုင်းအဝိုင်းတစ်ခုဖြစ်ပါသည်။</p>
-                    
+                    <p>Arcana Tarot Community သည် မြန်မာနိုင်ငံတွင် ဗေဒင်ပညာနှင့် တာရော့ဖတ်ခြင်းကို
+                        စိတ်ဝင်စားသူများအတွက် ဖန်တီးထားသော အသိုင်းအဝိုင်းတစ်ခုဖြစ်ပါသည်။</p>
+
                     <h2>⭐ ကျွန်ုပ်တို့၏ ရည်ရွယ်ချက်</h2>
-                    <p>ရှေးဟောင်း ဗေဒင်ပညာရပ်များကို ခေတ်သစ်နည်းလမ်းများဖြင့် ပေါင်းစပ်ကာ လူတိုင်းအတွက် နားလည်လွယ်ပြီး အသုံးဝင်သော ဟောစာတမ်းများကို ပေးအပ်ရန် ရည်ရွယ်ပါသည်။</p>
+                    <p>ရှေးဟောင်း ဗေဒင်ပညာရပ်များကို ခေတ်သစ်နည်းလမ်းများဖြင့် ပေါင်းစပ်ကာ လူတိုင်းအတွက် နားလည်လွယ်ပြီး
+                        အသုံးဝင်သော ဟောစာတမ်းများကို ပေးအပ်ရန် ရည်ရွယ်ပါသည်။</p>
 
                     <h2>🌟 ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုများ</h2>
                     <ul class="features-list">
@@ -811,7 +861,8 @@
                     </ul>
 
                     <h2>💜 ကျွန်ုပ်တို့နှင့် ဆက်သွယ်ရန်</h2>
-                    <p>သင်တန်းများနှင့် ပတ်သက်၍ စုံစမ်းမေးမြန်းလိုပါက "သင်တန်းစုံစမ်းရန်" စာမျက်နှာမှတစ်ဆင့် ဆက်သွယ်နိုင်ပါသည်။</p>
+                    <p>သင်တန်းများနှင့် ပတ်သက်၍ စုံစမ်းမေးမြန်းလိုပါက "သင်တန်းစုံစမ်းရန်" စာမျက်နှာမှတစ်ဆင့်
+                        ဆက်သွယ်နိုင်ပါသည်။</p>
                 </div>
             </div>
         </div>
@@ -825,16 +876,22 @@
                 </div>
                 <div class="about-content">
                     <h2>🃏 တာရော့ကဒ် အခြေခံသင်တန်း</h2>
-                    <p>၇၈ ကဒ်အဓိပ္ပာယ်နှင့် ဖတ်နည်းများကို အခြေခံမှစ၍ သင်ကြားပေးပါသည်။ Major Arcana ၂၂ ကဒ်နှင့် Minor Arcana ၅၆ ကဒ်တို့၏ အဓိပ္ပာယ်များ၊ ကဒ်ခင်းကျင်းနည်းများနှင့် ဖတ်ရှုနည်းများကို လေ့လာနိုင်ပါသည်။</p>
+                    <p>၇၈ ကဒ်အဓိပ္ပာယ်နှင့် ဖတ်နည်းများကို အခြေခံမှစ၍ သင်ကြားပေးပါသည်။ Major Arcana ၂၂ ကဒ်နှင့် Minor
+                        Arcana ၅၆ ကဒ်တို့၏ အဓိပ္ပာယ်များ၊ ကဒ်ခင်းကျင်းနည်းများနှင့် ဖတ်ရှုနည်းများကို လေ့လာနိုင်ပါသည်။
+                    </p>
 
                     <h2>🌙 ဗေဒင်ပညာ အခြေခံသင်တန်း</h2>
-                    <p>ဂြိုဟ်များ၊ ရာသီခွင်များနှင့် ဟောကိန်းများကို နားလည်လွယ်အောင် သင်ကြားပေးပါသည်။ ဇာတာဖွဲ့နည်း၊ ဂြိုဟ်အင်အားတွက်နည်းများနှင့် ဟောကိန်းထုတ်နည်းများကို သင်ယူနိုင်ပါသည်။</p>
+                    <p>ဂြိုဟ်များ၊ ရာသီခွင်များနှင့် ဟောကိန်းများကို နားလည်လွယ်အောင် သင်ကြားပေးပါသည်။ ဇာတာဖွဲ့နည်း၊
+                        ဂြိုဟ်အင်အားတွက်နည်းများနှင့် ဟောကိန်းထုတ်နည်းများကို သင်ယူနိုင်ပါသည်။</p>
 
                     <h2>✋ လက်ဗွေပညာ သင်တန်း</h2>
-                    <p>လက်ဗွေဖတ်ခြင်းနှင့် ခန့်မှန်းခြင်းပညာကို သင်ကြားပေးပါသည်။ လက်မျဉ်းများ၏ အဓိပ္ပာယ်များ၊ လက်ပုံသဏ္ဍာန်များနှင့် လက်ချောင်းများ၏ ဆိုလိုရင်းများကို လေ့လာနိုင်ပါသည်။</p>
+                    <p>လက်ဗွေဖတ်ခြင်းနှင့် ခန့်မှန်းခြင်းပညာကို သင်ကြားပေးပါသည်။ လက်မျဉ်းများ၏ အဓိပ္ပာယ်များ၊
+                        လက်ပုံသဏ္ဍာန်များနှင့် လက်ချောင်းများ၏ ဆိုလိုရင်းများကို လေ့လာနိုင်ပါသည်။</p>
 
                     <h2>⭐ အဆင့်မြင့် သင်တန်းများ</h2>
-                    <p>အခြေခံသင်တန်းများ ပြီးဆုံးပြီးသူများအတွက် အဆင့်မြင့်သင်တန်းများကို ဖွင့်လှစ်ပေးပါသည်။ တစ်ဦးချင်း ဟောစာတမ်းဖတ်ခြင်း၊ စီးပွားရေးအတွက် ဟောကိန်းထုတ်ခြင်းနှင့် အထူးကိစ္စရပ်များအတွက် ဖတ်ရှုနည်းများကို သင်ယူနိုင်ပါသည်။</p>
+                    <p>အခြေခံသင်တန်းများ ပြီးဆုံးပြီးသူများအတွက် အဆင့်မြင့်သင်တန်းများကို ဖွင့်လှစ်ပေးပါသည်။ တစ်ဦးချင်း
+                        ဟောစာတမ်းဖတ်ခြင်း၊ စီးပွားရေးအတွက် ဟောကိန်းထုတ်ခြင်းနှင့် အထူးကိစ္စရပ်များအတွက်
+                        ဖတ်ရှုနည်းများကို သင်ယူနိုင်ပါသည်။</p>
 
                     <h2>📞 ဆက်သွယ်ရန်</h2>
                     <ul class="features-list">
@@ -843,7 +900,8 @@
                         <li>Phone: 09-xxx-xxx-xxx</li>
                     </ul>
 
-                    <p style="margin-top: 1.5rem; text-align: center; color: var(--accent-gold);">✨ သင်တန်းများနှင့် ပတ်သက်၍ အသေးစိတ် သိရှိလိုပါက အထက်ပါ လိပ်စာများမှတစ်ဆင့် ဆက်သွယ်မေးမြန်းနိုင်ပါသည် ✨</p>
+                    <p style="margin-top: 1.5rem; text-align: center; color: var(--accent-gold);">✨ သင်တန်းများနှင့်
+                        ပတ်သက်၍ အသေးစိတ် သိရှိလိုပါက အထက်ပါ လိပ်စာများမှတစ်ဆင့် ဆက်သွယ်မေးမြန်းနိုင်ပါသည် ✨</p>
                 </div>
             </div>
         </div>
@@ -902,11 +960,11 @@
             const content = btn.parentElement;
             const preview = content.querySelector('.horoscope-preview');
             const card = btn.closest('.day-card');
-            
+
             btn.classList.toggle('active');
             preview.classList.toggle('expanded');
             card.classList.toggle('expanded');
-            
+
             if (btn.classList.contains('active')) {
                 btn.innerHTML = 'ခေါက်သိမ်းရန် <span class="arrow">▼</span>';
             } else {
@@ -919,7 +977,7 @@
             try {
                 const response = await fetch('/api/horoscope');
                 const result = await response.json();
-                
+
                 if (result.success && result.data) {
                     result.data.forEach(item => {
                         // data-day attribute နှင့် match လုပ်ခြင်း
@@ -930,7 +988,7 @@
                             if (dateRange && item.date_range) {
                                 dateRange.textContent = item.date_range;
                             }
-                            
+
                             // Horoscope update
                             const preview = card.querySelector('.horoscope-preview');
                             if (preview && item.horoscope) {
@@ -946,9 +1004,10 @@
         }
 
         // Page load မှာ Notion data fetch လုပ်ခြင်း
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             fetchHoroscopes();
         });
     </script>
 </body>
+
 </html>
